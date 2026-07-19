@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Balaji Tours & Travels | Aligarh</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script>
+tailwind.config={theme:{extend:{colors:{gold:'#FFD700','gold-light':'#FFF3B0','gold-dark':'#B8860B','dark-bg':'#020B18','blue-royal':'#0B3D91','blue-mid':'#1565C0'},fontFamily:{playfair:['Playfair Display','serif'],inter:['Inter','sans-serif']}}}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#020B18;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#020B18}
+::-webkit-scrollbar-thumb{background:#FFD700;border-radius:3px}
+
+/* GOLD TEXT */
+.gold-text{
+  background:linear-gradient(135deg,#FFD700,#FFF3B0,#B8860B,#FFD700);
+  background-size:300% 300%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:goldShimmer 4s ease infinite;
+}
+@keyframes goldShimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* SCROLL PROGRESS */
+#scrollBar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#FFD700,#FFF3B0);z-index:99999;width:0%}
+
+/* NAV */
+.nav-link{position:relative;transition:color 0.3s}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#FFD700;transition:width 0.3s}
+.nav-link:hover::after{width:100%}
+.nav-link:hover{color:#FFD700}
+#mobileMenu{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+#mobileMenu.open{max-height:500px}
+
+/* HERO CANVAS */
+#heroCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
+
+/* SNOW */
+.snowflake{position:absolute;pointer-events:none;z-index:2;user-select:none;animation:fall linear infinite}
+@keyframes fall{
+  0%{transform:translateY(-20px) translateX(0) rotate(0deg);opacity:1}
+  50%{transform:translateY(50vh) translateX(15px) rotate(180deg);opacity:0.7}
+  100%{transform:translateY(100vh) translateX(-10px) rotate(360deg);opacity:0}
+}
+
+/* MOUNTAIN */
+.mountain-wrap{position:absolute;bottom:0;left:0;width:100%;z-index:1;overflow:hidden}
+
+/* PULSE RING */
+@keyframes pulseRing{0%{transform:scale(0.8);opacity:1}100%{transform:scale(2.2);opacity:0}}
+.pulse-ring{position:relative}
+.pulse-ring::before,.pulse-ring::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid #FFD700;animation:pulseRing 2s ease-out infinite}
+.pulse-ring::after{animation-delay:1s}
+
+/* BADGE LIVE */
+@keyframes pulseBadge{0%,100%{box-shadow:0 0 0 0 rgba(0,200,83,0.5)}50%{box-shadow:0 0 0 8px rgba(0,200,83,0)}}
+.badge-live{background:linear-gradient(135deg,#00c853,#69f0ae);animation:pulseBadge 2s infinite}
+
+/* FLOAT */
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* PERMIT BADGE */
+.permit-badge{background:linear-gradient(135deg,#1a237e,#283593);border:1px solid rgba(255,215,0,0.5);position:relative;overflow:hidden}
+.permit-badge::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent 40%,rgba(255,215,0,0.12) 50%,transparent 60%);animation:shine 3s linear infinite}
+@keyframes shine{0%{transform:translateX(-100%) translateY(-100%) rotate(45deg)}100%{transform:translateX(100%) translateY(100%) rotate(45deg)}}
+
+/* GLASS CARD */
+.glass-card{background:rgba(7,21,37,0.88);backdrop-filter:blur(20px);border:1px solid rgba(255,215,0,0.15);transition:all 0.4s ease}
+.glass-card:hover{border-color:rgba(255,215,0,0.5);box-shadow:0 0 30px rgba(255,215,0,0.1),0 20px 60px rgba(0,0,0,0.5);transform:translateY(-8px)}
+
+/* GOLD DIVIDER */
+.gold-divider{height:1px;background:linear-gradient(90deg,transparent,#FFD700,transparent)}
+
+/* LUXURY LINE */
+.luxury-line{display:flex;align-items:center;gap:12px}
+.luxury-line::before,.luxury-line::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#FFD700)}
+.luxury-line::after{background:linear-gradient(90deg,#FFD700,transparent)}
+
+/* BTNS */
+.btn-gold{background:linear-gradient(135deg,#B8860B,#FFD700,#B8860B);background-size:200%;color:#020B18;font-weight:700;transition:all 0.4s}
+.btn-gold:hover{background-position:right;box-shadow:0 0 30px rgba(255,215,0,0.5);transform:translateY(-2px)}
+.btn-outline{border:2px solid #FFD700;color:#FFD700;transition:all 0.3s}
+.btn-outline:hover{background:#FFD700;color:#020B18;box-shadow:0 0 20px rgba(255,215,0,0.4)}
+
+/* GOLD GLOW */
+.gold-glow{box-shadow:0 0 20px rgba(255,215,0,0.3),0 0 60px rgba(255,215,0,0.1)}
+
+/* GOLD BORDER ANIMATE */
+.gba{position:relative;overflow:hidden}
+.gba::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:2px;background:linear-gradient(90deg,transparent,#FFD700,transparent);animation:borderSlide 3s linear infinite}
+@keyframes borderSlide{0%{left:-100%}100%{left:100%}}
+
+/* REVEAL */
+.reveal-up{opacity:0;transform:translateY(60px)}
+.reveal-left{opacity:0;transform:translateX(-60px)}
+.reveal-right{opacity:0;transform:translateX(60px)}
+.reveal-scale{opacity:0;transform:scale(0.8)}
+
+/* COUNTER */
+.counter-num{font-family:'Playfair Display',serif;background:linear-gradient(135deg,#FFD700,#FFF3B0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* VEHICLE CARD */
+.v-card{background:linear-gradient(145deg,#071525,#0A1E35);border:1px solid rgba(255,215,0,0.12);transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);border-radius:16px;overflow:hidden}
+.v-card:hover{border-color:rgba(255,215,0,0.6);box-shadow:0 0 40px rgba(255,215,0,0.15);transform:translateY(-10px) scale(1.02)}
+
+/* SLIDER */
+.v-slider{position:relative;height:160px;overflow:hidden;background:linear-gradient(135deg,#071525,#0A1E35)}
+.v-slide{position:absolute;inset:0;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1),opacity 0.45s ease}
+.v-slide.active{transform:translateX(0);opacity:1;z-index:2}
+.v-slide.go-left{transform:translateX(-100%);opacity:0;z-index:1}
+.v-slide.go-right{transform:translateX(100%);opacity:0;z-index:1}
+.v-slide img{width:100%;height:100%;object-fit:cover;display:none}
+.v-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px dashed rgba(255,215,0,0.3);cursor:pointer;transition:all 0.3s}
+.v-placeholder:hover{border-color:rgba(255,215,0,0.7);background:rgba(255,215,0,0.03)}
+.s-arrow{position:absolute;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,0.65);border:1px solid rgba(255,215,0,0.4);color:#FFD700;font-size:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all 0.3s;backdrop-filter:blur(4px)}
+.s-arrow:hover{background:rgba(255,215,0,0.2);border-color:#FFD700;box-shadow:0 0 10px rgba(255,215,0,0.3)}
+.s-arrow.l{left:6px}.s-arrow.r{right:6px}
+.s-dots{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:10}
+.s-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:all 0.3s}
+.s-dot.active{background:#FFD700;width:16px;border-radius:3px}
+.s-count{position:absolute;top:7px;right:7px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,215,0,0.3);color:#FFD700;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;z-index:10}
+
+/* REVIEW CARD */
+.review-card{background:linear-gradient(145deg,#071525,#0D2137);border:1px solid rgba(255,215,0,0.1);transition:all 0.4s;border-radius:16px}
+.review-card:hover{border-color:rgba(255,215,0,0.4);box-shadow:0 10px 40px rgba(255,215,0,0.08);transform:translateY(-5px)}
+
+/* COMING SOON */
+.cs-overlay{background:linear-gradient(135deg,rgba(2,11,24,0.92),rgba(11,61,145,0.85));backdrop-filter:blur(5px)}
+
+/* IMG PLACEHOLDER */
+.img-ph{background:linear-gradient(135deg,#071525,#0A1E35);border:2px dashed rgba(255,215,0,0.3);cursor:pointer;position:relative;overflow:hidden;transition:all 0.3s}
+.img-ph:hover{border-color:rgba(255,215,0,0.7)}
+.img-ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:none}
+
+/* DEST CARD */
+.dest-card{background:linear-gradient(145deg,#071525,#0A1E35);border:2px solid rgba(255,215,0,0.1);transition:all 0.3s;cursor:pointer;position:relative;overflow:hidden;border-radius:12px}
+.dest-card:hover,.dest-card.selected{border-color:#FFD700;box-shadow:0 0 25px rgba(255,215,0,0.2);transform:translateY(-4px)}
+.dest-card.selected{background:linear-gradient(145deg,#0d2444,#1a3a6b)}
+.dest-check{position:absolute;top:8px;right:8px;width:22px;height:22px;background:#FFD700;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:all 0.3s}
+.dest-card.selected .dest-check{opacity:1;transform:scale(1)}
+
+/* CONTACT CARD */
+.contact-card{background:rgba(7,21,37,0.85);backdrop-filter:blur(20px);border:1px solid rgba(255,215,0,0.15);transition:all 0.3s;border-radius:16px}
+.contact-card:hover{border-color:rgba(255,215,0,0.5);box-shadow:0 0 20px rgba(255,215,0,0.1);transform:translateX(8px)}
+
+/* FORM INPUT */
+.f-input{width:100%;background:#020B18;border:1px solid rgba(255,215,0,0.2);border-radius:12px;padding:12px 16px;color:#fff;font-size:14px;transition:border-color 0.3s;outline:none}
+.f-input:focus{border-color:rgba(255,215,0,0.6)}
+.f-input::placeholder{color:#4b5563}
+
+/* AURORA */
+.aurora{position:absolute;top:0;left:0;right:0;height:60%;z-index:0;overflow:hidden}
+.aurora-band{position:absolute;width:200%;height:300px;border-radius:50%;filter:blur(60px);opacity:0.15;animation:auroraMove 8s ease-in-out infinite}
+@keyframes auroraMove{0%,100%{transform:translateX(-20%) scaleX(1)}50%{transform:translateX(10%) translateY(-30px) scaleX(1.1)}}
+
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:9999;animation:floatY 3s ease-in-out infinite}
+
+/* STARS */
+.stars{color:#FFD700}
+
+@media(max-width:768px){
+  .hero-title{font-size:2.5rem!important}
+  .hero-tag{font-size:1rem!important}
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL BAR -->
+<div id="scrollBar"></div>
+
+<!-- ========== NAV ========== -->
+<nav id="mainNav" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background:transparent">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+
+      <!-- LOGO -->
+      <div class="flex items-center gap-3">
+        <div class="relative w-12 h-12 pulse-ring">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
+            <i class="fas fa-om text-dark-bg text-xl"></i>
+          </div>
+        </div>
+        <div>
+          <div class="font-playfair text-xl font-bold leading-tight gold-text">Balaji Tours</div>
+          <div class="text-xs text-blue-300 tracking-widest uppercase">&amp; Travels, Aligarh</div>
+        </div>
+      </div>
+
+      <!-- DESKTOP NAV -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home"     class="nav-link text-sm text-gray-300">Home</a>
+        <a href="#packages" class="nav-link text-sm text-gray-300">Packages</a>
+        <a href="#fleet"    class="nav-link text-sm text-gray-300">Fleet</a>
+        <a href="#memories" class="nav-link text-sm text-gray-300">Memories</a>
+        <a href="#reviews"  class="nav-link text-sm text-gray-300">Reviews</a>
+        <a href="#contact"  class="nav-link text-sm text-gray-300">Contact</a>
+        <a href="https://wa.me/918273318888" target="_blank"
+           class="btn-gold px-5 py-2 rounded-full text-sm flex items-center gap-2">
+          <i class="fab fa-whatsapp"></i> Book Now
+        </a>
+      </div>
+
+      <!-- HAMBURGER -->
+      <button class="md:hidden text-gold text-2xl" onclick="toggleMenu()">
+        <i id="menuIcon" class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="md:hidden">
+      <div class="py-4 space-y-2 border-t border-yellow-500 border-opacity-20">
+        <a href="#home"     class="block text-gray-300 py-2 px-4 hover:text-yellow-400" onclick="toggleMenu()">Home</a>
+        <a href="#packages" class="block text-gray-300 py-2 px-4 hover:text-yellow-400" onclick="toggleMenu()">Packages</a>
+        <a href="#fleet"    class="block text-gray-300 py-2 px-4 hover:text-yellow-400" onclick="toggleMenu()">Fleet</a>
+        <a href="#memories" class="block text-gray-300 py-2 px-4 hover:text-yellow-400" onclick="toggleMenu()">Memories</a>
+        <a href="#reviews"  class="block text-gray-300 py-2 px-4 hover:text-yellow-400" onclick="toggleMenu()">Reviews</a>
+        <a href="#contact"  class="block text-gray-300 py-2 px-4 hover:text-yellow-400" onclick="toggleMenu()">Contact</a>
+        <a href="https://wa.me/918273318888" target="_blank"
+           class="block btn-gold mx-4 py-3 rounded-full text-center text-sm">
+          <i class="fab fa-whatsapp mr-2"></i>Book Now
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  style="background:linear-gradient(180deg,#010812 0%,#041630 25%,#0B3D91 65%,#1a6fc4 85%,#c8e6ff 100%)">
+
+  <div class="aurora">
+    <div class="aurora-band" style="top:10%;left:-20%;background:radial-gradient(ellipse,#1565C0,transparent)"></div>
+    <div class="aurora-band" style="top:5%;left:30%;background:radial-gradient(ellipse,#0B3D91,transparent);animation-delay:-3s;opacity:0.1"></div>
+    <div class="aurora-band" style="top:20%;left:60%;background:radial-gradient(ellipse,#4FC3F7,transparent);animation-delay:-5s;opacity:0.08"></div>
+  </div>
+
+  <canvas id="heroCanvas"></canvas>
+  <div id="snowBox" class="absolute inset-0 overflow-hidden pointer-events-none" style="z-index:2"></div>
+
+  <!-- MOUNTAIN SVG -->
+  <div class="mountain-wrap" style="height:55vh">
+    <svg viewBox="0 0 1440 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet" style="width:100%;height:100%;display:block">
+      <defs>
+        <linearGradient id="mg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3a6b"/><stop offset="100%" stop-color="#0d2244"/></linearGradient>
+        <linearGradient id="mg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2155a0"/><stop offset="100%" stop-color="#0c2348"/></linearGradient>
+        <linearGradient id="mg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1d4a85"/><stop offset="100%" stop-color="#0b1e3c"/></linearGradient>
+        <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.97"/><stop offset="100%" stop-color="#ddeeff" stop-opacity="0.7"/></linearGradient>
+        <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#cce0ff" stop-opacity="0.6"/><stop offset="100%" stop-color="#aac8ee" stop-opacity="0.4"/></linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="shadow"><feDropShadow dx="0" dy="-4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/></filter>
+      </defs>
+      <!-- Far back -->
+      <polygon points="0,500 180,200 360,500" fill="url(#mg1)" opacity="0.5"/>
+      <polygon points="120,500 330,140 540,500" fill="url(#mg1)" opacity="0.55"/>
+      <polygon points="450,500 680,110 910,500" fill="url(#mg1)" opacity="0.5"/>
+      <polygon points="800,500 1020,160 1240,500" fill="url(#mg1)" opacity="0.5"/>
+      <polygon points="1080,500 1280,190 1440,500" fill="url(#mg1)" opacity="0.45"/>
+      <!-- Mid -->
+      <polygon points="-20,500 150,170 320,500" fill="url(#mg2)" opacity="0.75" filter="url(#shadow)"/>
+      <polygon points="80,500 310,100 520,500" fill="url(#mg3)" opacity="0.8" filter="url(#shadow)"/>
+      <polygon points="300,500 560,60 800,500" fill="url(#mg2)" opacity="0.82" filter="url(#shadow)"/>
+      <polygon points="580,500 810,90 1020,500" fill="url(#mg3)" opacity="0.78" filter="url(#shadow)"/>
+      <polygon points="860,500 1080,130 1280,500" fill="url(#mg2)" opacity="0.75" filter="url(#shadow)"/>
+      <polygon points="1100,500 1290,165 1460,500" fill="url(#mg3)" opacity="0.7" filter="url(#shadow)"/>
+      <!-- Front -->
+      <polygon points="-30,500 200,155 430,500" fill="#0d2a52" opacity="0.95"/>
+      <polygon points="200,500 430,75 660,500" fill="#0f2e58"/>
+      <polygon points="480,500 720,40 960,500" fill="#0c2850"/>
+      <polygon points="740,500 970,80 1200,500" fill="#0e2d56" opacity="0.97"/>
+      <polygon points="1020,500 1230,120 1440,500" fill="#0c2850" opacity="0.95"/>
+      <!-- Snow caps mid -->
+      <polygon points="310,100 345,145 275,145" fill="url(#sg)" opacity="0.7"/>
+      <polygon points="560,60 605,115 515,115" fill="url(#sg)" opacity="0.72"/>
+      <polygon points="810,90 850,138 770,138" fill="url(#sg)" opacity="0.68"/>
+      <polygon points="1080,130 1115,172 1045,172" fill="url(#sg)" opacity="0.65"/>
+      <!-- Snow caps front -->
+      <polygon points="200,155 240,205 160,205" fill="url(#sg)" filter="url(#glow)"/>
+      <polygon points="160,205 200,225 130,235" fill="url(#sg)" opacity="0.7"/>
+      <polygon points="240,205 280,225 200,230" fill="url(#sg)" opacity="0.65"/>
+      <polygon points="430,75 480,135 380,135" fill="url(#sg)" filter="url(#glow)"/>
+      <polygon points="380,135 430,155 320,175" fill="url(#sg)" opacity="0.7"/>
+      <polygon points="480,135 530,155 440,170" fill="url(#sg)" opacity="0.65"/>
+      <polygon points="720,40 778,108 662,108" fill="url(#sg)" filter="url(#glow)"/>
+      <polygon points="662,108 720,130 590,158" fill="url(#sg)" opacity="0.72"/>
+      <polygon points="778,108 835,130 720,155" fill="url(#sg)" opacity="0.68"/>
+      <polygon points="970,80 1022,138 918,138" fill="url(#sg)" filter="url(#glow)"/>
+      <polygon points="918,138 970,160 860,182" fill="url(#sg)" opacity="0.7"/>
+      <polygon points="1230,120 1278,172 1182,172" fill="url(#sg)" filter="url(#glow)"/>
+      <!-- Ground snow -->
+      <path d="M0,430 Q80,415 160,425 Q240,435 320,420 Q400,405 480,418 Q560,431 640,415 Q720,400 800,415 Q880,430 960,418 Q1040,406 1120,418 Q1200,430 1280,418 Q1360,406 1440,420 L1440,500 L0,500 Z" fill="url(#gg)" opacity="0.6"/>
+      <path d="M0,450 Q90,440 180,448 Q270,456 360,444 Q450,432 540,445 Q630,458 720,444 Q810,430 900,445 Q990,460 1080,447 Q1170,434 1260,447 Q1350,460 1440,450 L1440,500 L0,500 Z" fill="#b8d8f8" opacity="0.45"/>
+      <path d="M0,470 Q180,462 360,470 Q540,478 720,468 Q900,458 1080,470 Q1260,482 1440,470 L1440,500 L0,500 Z" fill="#daeeff" opacity="0.55"/>
+      <path d="M0,486 Q360,480 720,485 Q1080,490 1440,484 L1440,500 L0,500 Z" fill="white" opacity="0.3"/>
+      <!-- Moon glow -->
+      <circle cx="720" cy="42" r="38" fill="white" opacity="0.03"/>
+      <circle cx="720" cy="42" r="22" fill="white" opacity="0.05"/>
+      <circle cx="720" cy="42" r="11" fill="white" opacity="0.09"/>
+    </svg>
+  </div>
+
+  <!-- HERO CONTENT -->
+  <div class="relative z-10 text-center px-4 max-w-5xl mx-auto" style="padding-bottom:150px;padding-top:90px">
+
+    <!-- HERO BADGE -->
+    <div id="heroBadge" class="inline-flex items-center gap-2 bg-blue-royal bg-opacity-60 border border-yellow-400 border-opacity-40 rounded-full px-5 py-2 mb-6 text-sm text-yellow-100 tracking-wider">
+      <span class="w-2 h-2 rounded-full badge-live inline-block"></span>
+      1000+ Happy Travelers &nbsp;|&nbsp; All India Permit
+    </div>
+
+    <h1 id="heroTitle" class="hero-title font-playfair font-bold text-5xl md:text-7xl lg:text-8xl mb-4 leading-tight">
+      <span class="gold-text">Balaji</span> <span class="text-white">Tours &</span><br/>
+      <span class="text-white">Travels</span>
+    </h1>
+
+    <p id="heroTag" class="hero-tag text-lg md:text-2xl text-blue-200 mb-3 font-light tracking-wide">
+      ✨ Where Every Journey Becomes a Divine Memory ✨
+    </p>
+    <p id="heroSub" class="text-gray-300 text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+      Premium pilgrimage &amp; leisure tours from Aligarh — comfortable vehicles, trusted drivers, unforgettable experiences
+    </p>
+
+    <!-- ALL INDIA PERMIT BADGE -->
+    <div id="permitBadge" class="inline-flex items-center gap-3 permit-badge rounded-2xl px-6 py-3 mb-8">
+      <div class="w-10 h-10 rounded-full bg-yellow-400 bg-opacity-20 flex items-center justify-center">
+        <i class="fas fa-certificate text-yellow-400 text-lg"></i>
+      </div>
+      <div class="text-left">
+        <p class="text-yellow-400 font-bold text-sm tracking-wider">ALL INDIA PERMIT</p>
+        <p class="text-blue-300 text-xs">Licensed &amp; Authorized Pan-India Tours</p>
+      </div>
+      <i class="fas fa-check-circle text-green-400 text-xl ml-2"></i>
+    </div>
+
+    <div id="heroBtns" class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#packages" class="btn-gold px-8 py-4 rounded-full text-base flex items-center justify-center gap-2">
+        <i class="fas fa-map-marked-alt"></i> Explore Packages
+      </a>
+      <a href="https://wa.me/918273318888" target="_blank"
+         class="btn-outline px-8 py-4 rounded-full text-base flex items-center justify-center gap-2">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+
+    <div class="mt-14 flex flex-col items-center gap-2 animate-bounce">
+      <span class="text-xs text-gray-400 tracking-widest uppercase">Scroll to Explore</span>
+      <div class="w-6 h-10 border-2 border-yellow-400 border-opacity-40 rounded-full flex justify-center pt-2">
+        <div class="w-1 h-3 bg-yellow-400 rounded-full"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS ========== -->
+<section class="py-16" style="background:linear-gradient(135deg,#071525,#020B18)">
+  <div class="gold-divider mb-12"></div>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+      <div class="text-center reveal-scale">
+        <div class="counter-num text-5xl font-bold mb-2" data-target="1000" data-suffix="+">0</div>
+        <div class="text-gray-400 text-sm">Happy Customers</div>
+        <div class="w-12 h-1 bg-yellow-400 mx-auto mt-2 rounded"></div>
+      </div>
+
+      <div class="text-center reveal-scale">
+        <div class="counter-num text-5xl font-bold mb-2" data-target="20" data-suffix="+">0</div>
+        <div class="text-gray-400 text-sm">Destinations Covered</div>
+        <div class="w-12 h-1 bg-yellow-400 mx-auto mt-2 rounded"></div>
+      </div>
+
+      <div class="text-center reveal-scale">
+        <div class="counter-num text-5xl font-bold mb-2" data-target="10" data-suffix="+">0</div>
+        <div class="text-gray-400 text-sm">Vehicles in Fleet</div>
+        <div class="w-12 h-1 bg-yellow-400 mx-auto mt-2 rounded"></div>
+      </div>
+
+      <div class="text-center reveal-scale">
+        <div class="counter-num text-5xl font-bold mb-2" data-target="2" data-suffix=" Yrs">0</div>
+        <div class="text-gray-400 text-sm">Years of Experience</div>
+        <div class="w-12 h-1 bg-yellow-400 mx-auto mt-2 rounded"></div>
+      </div>
+
+    </div>
+  </div>
+  <div class="gold-divider mt-12"></div>
+</section>
+
+<!-- ========== WHY CHOOSE US ========== -->
+<section id="why" class="py-24 px-4" style="background:#020B18">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 reveal-up">
+      <p class="text-yellow-400 text-sm tracking-widest uppercase mb-3 luxury-line">Our Promise</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">Why Choose <span class="gold-text">Balaji Tours?</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">We don't just plan trips — we craft divine journeys with care, comfort, and complete trust</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="glass-card rounded-2xl p-8 text-center reveal-scale">
+        <div class="w-16 h-16 bg-blue-royal rounded-full flex items-center justify-center mx-auto mb-5 gold-glow">
+          <i class="fas fa-certificate text-yellow-400 text-2xl"></i>
+        </div>
+        <h3 class="font-playfair text-xl font-bold text-white mb-3">All India Permit</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Fully licensed with All India Permit — travel anywhere across India with complete legal authorization.</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8 text-center reveal-scale">
+        <div class="w-16 h-16 bg-blue-royal rounded-full flex items-center justify-center mx-auto mb-5 gold-glow">
+          <i class="fas fa-shield-alt text-yellow-400 text-2xl"></i>
+        </div>
+        <h3 class="font-playfair text-xl font-bold text-white mb-3">100% Safe & Trusted</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Verified drivers, insured vehicles, and safe routes — your safety is our first priority on every journey.</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8 text-center reveal-scale">
+        <div class="w-16 h-16 bg-blue-royal rounded-full flex items-center justify-center mx-auto mb-5 gold-glow">
+          <i class="fas fa-pray text-yellow-400 text-2xl"></i>
+        </div>
+        <h3 class="font-playfair text-xl font-bold text-white mb-3">Pilgrimage Specialists</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Expert in Hindu pilgrimage tours — we understand the spiritual needs of our travelers and plan accordingly.</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8 text-center reveal-scale">
+        <div class="w-16 h-16 bg-blue-royal rounded-full flex items-center justify-center mx-auto mb-5 gold-glow">
+          <i class="fas fa-rupee-sign text-yellow-400 text-2xl"></i>
+        </div>
+        <h3 class="font-playfair text-xl font-bold text-white mb-3">Best Price Guarantee</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Transparent pricing with no hidden charges. Get the most value for your money on every tour package.</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8 text-center reveal-scale">
+        <div class="w-16 h-16 bg-blue-royal rounded-full flex items-center justify-center mx-auto mb-5 gold-glow">
+          <i class="fas fa-car text-yellow-400 text-2xl"></i>
+        </div>
+        <h3 class="font-playfair text-xl font-bold text-white mb-3">Premium Fleet</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">From luxury SUVs to large AC buses — we have vehicles for every group size with maximum comfort.</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8 text-center reveal-scale">
+        <div class="w-16 h-16 bg-blue-royal rounded-full flex items-center justify-center mx-auto mb-5 gold-glow">
+          <i class="fas fa-headset text-yellow-400 text-2xl"></i>
+        </div>
+        <h3 class="font-playfair text-xl font-bold text-white mb-3">24/7 Support</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Our team is always available — before, during, and after your journey. We're just a call away anytime.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== PACKAGES ========== -->
+<section id="packages" class="py-24 px-4" style="background:linear-gradient(180deg,#020B18,#071525)">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 reveal-up">
+      <p class="text-yellow-400 text-sm tracking-widest uppercase mb-3 luxury-line">Explore India</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">Our Tour <span class="gold-text">Packages</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Sacred destinations, divine experiences — curated packages for every devotee</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- UJJAIN -->
+      <div class="glass-card rounded-2xl overflow-hidden reveal-scale">
+        <div class="relative h-48 img-ph" onclick="addPackageImg(this)">
+          <img src="" alt="" class="photo-img"/>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 ph-label">
+            <i class="fas fa-image text-yellow-400 text-3xl mb-2 opacity-50"></i>
+            <span class="text-xs text-gray-500">Click to add Ujjain photo</span>
+          </div>
+          <div class="absolute top-3 left-3 badge-live text-dark-bg text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+            <span class="w-2 h-2 bg-dark-bg rounded-full"></span> ONGOING
+          </div>
+          <div class="absolute top-3 right-3 bg-yellow-400 text-dark-bg text-xs font-bold px-3 py-1 rounded-full">₹3,100</div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-2 mb-2"><i class="fas fa-om text-yellow-400 text-sm"></i><h3 class="font-playfair text-xl font-bold text-white">Ujjain</h3></div>
+          <p class="text-yellow-400 text-xs tracking-wider mb-2">Madhya Pradesh</p>
+          <p class="text-gray-400 text-sm mb-3 leading-relaxed">Book fast — limited seats! Sacred Mahakaleshwar Jyotirlinga awaits.</p>
+          <div class="text-xs text-red-400 font-semibold mb-4 flex items-center gap-1"><i class="fas fa-fire"></i> Seats Filling Fast!</div>
+          <a href="https://wa.me/918273318888?text=I want to book Ujjain tour at ₹3100" target="_blank"
+             class="btn-gold w-full py-3 rounded-xl text-sm text-center block">Book Now — ₹3,100</a>
+        </div>
+      </div>
+
+      <!-- KHATU SHYAM -->
+      <div class="glass-card rounded-2xl overflow-hidden reveal-scale relative">
+        <div class="relative h-48 img-ph">
+          <img src="" alt="" class="photo-img"/>
+          <div class="absolute inset-0 flex items-center justify-center ph-label"><i class="fas fa-image text-yellow-400 text-3xl opacity-50"></i></div>
+        </div>
+        <div class="cs-overlay absolute inset-0 flex items-center justify-center z-10">
+          <div class="text-center">
+            <i class="fas fa-clock text-yellow-400 text-4xl mb-3"></i>
+            <p class="text-yellow-400 font-playfair text-xl font-bold">Coming Soon</p>
+            <p class="text-gray-300 text-xs mt-1">Stay tuned for updates</p>
+            <div class="mt-3 bg-yellow-400 bg-opacity-20 border border-yellow-400 border-opacity-30 px-4 py-1 rounded-full"><span class="text-yellow-400 text-xs">₹1,800 per person</span></div>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-2 mb-2"><i class="fas fa-om text-yellow-400 text-sm"></i><h3 class="font-playfair text-xl font-bold text-white">Khatu Shyam & Balaji</h3></div>
+          <p class="text-yellow-400 text-xs tracking-wider mb-2">Rajasthan</p>
+          <p class="text-gray-400 text-sm mb-4">We will notify you about this sacred journey soon.</p>
+          <button onclick="notifyMe('Khatu Shyam & Balaji')" class="btn-outline w-full py-3 rounded-xl text-sm font-bold"><i class="fas fa-bell mr-2"></i>Notify Me</button>
+        </div>
+      </div>
+
+      <!-- MATHURA -->
+      <div class="glass-card rounded-2xl overflow-hidden reveal-scale relative">
+        <div class="relative h-48 img-ph">
+          <img src="" alt="" class="photo-img"/>
+          <div class="absolute inset-0 flex items-center justify-center ph-label"><i class="fas fa-image text-yellow-400 text-3xl opacity-50"></i></div>
+        </div>
+        <div class="cs-overlay absolute inset-0 flex items-center justify-center z-10">
+          <div class="text-center">
+            <i class="fas fa-clock text-yellow-400 text-4xl mb-3"></i>
+            <p class="text-yellow-400 font-playfair text-xl font-bold">Coming Soon</p>
+            <p class="text-gray-300 text-xs mt-1">Stay tuned for updates</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-2 mb-2"><i class="fas fa-om text-yellow-400 text-sm"></i><h3 class="font-playfair text-xl font-bold text-white">Mathura Vrindavan</h3></div>
+          <p class="text-yellow-400 text-xs tracking-wider mb-2">Uttar Pradesh</p>
+          <p class="text-gray-400 text-sm mb-4">Divine land of Lord Krishna — coming very soon.</p>
+          <button onclick="notifyMe('Mathura Vrindavan')" class="btn-outline w-full py-3 rounded-xl text-sm font-bold"><i class="fas fa-bell mr-2"></i>Notify Me</button>
+        </div>
+      </div>
+
+      <!-- HARIDWAR -->
+      <div class="glass-card rounded-2xl overflow-hidden reveal-scale relative">
+        <div class="relative h-48 img-ph">
+          <img src="" alt="" class="photo-img"/>
+          <div class="absolute inset-0 flex items-center justify-center ph-label"><i class="fas fa-image text-yellow-400 text-3xl opacity-50"></i></div>
+        </div>
+        <div class="cs-overlay absolute inset-0 flex items-center justify-center z-10">
+          <div class="text-center">
+            <i class="fas fa-clock text-yellow-400 text-4xl mb-3"></i>
+            <p class="text-yellow-400 font-playfair text-xl font-bold">Coming Soon</p>
+            <p class="text-gray-300 text-xs mt-1">Stay tuned for updates</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-2 mb-2"><i class="fas fa-om text-yellow-400 text-sm"></i><h3 class="font-playfair text-xl font-bold text-white">Haridwar Rishikesh</h3></div>
+          <p class="text-yellow-400 text-xs tracking-wider mb-2">Uttarakhand</p>
+          <p class="text-gray-400 text-sm mb-4">Gateway to Char Dham — Ganga Aarti awaits you.</p>
+          <button onclick="notifyMe('Haridwar Rishikesh')" class="btn-outline w-full py-3 rounded-xl text-sm font-bold"><i class="fas fa-bell mr-2"></i>Notify Me</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FLEET ========== -->
+<section id="fleet" class="py-24 px-4" style="background:#020B18">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal-up">
+      <p class="text-yellow-400 text-sm tracking-widest uppercase mb-3 luxury-line">Travel in Comfort</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">Our Premium <span class="gold-text">Fleet</span></h2>
+      <div class="inline-flex items-center gap-2 permit-badge rounded-full px-5 py-2 mt-3">
+        <i class="fas fa-certificate text-yellow-400 text-sm"></i>
+        <span class="text-yellow-400 text-sm font-bold tracking-wider">ALL INDIA PERMIT</span>
+        <i class="fas fa-check-circle text-green-400 text-sm"></i>
+      </div>
+      <p class="text-gray-400 max-w-2xl mx-auto mt-4">Click arrows to see 2 photos per vehicle</p>
+    </div>
+
+    <!-- CARS -->
+    <div class="mb-14">
+      <div class="flex items-center gap-4 mb-8">
+        <i class="fas fa-car text-yellow-400 text-xl"></i>
+        <h3 class="font-playfair text-2xl font-bold text-white">Cars & SUVs</h3>
+        <div class="flex-1 h-px bg-gradient-to-r from-yellow-400 to-transparent opacity-30"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+        <!-- XUV -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-xuv">1 / 2</div>
+            <div class="v-slide active" id="vs-xuv-0">
+              <img class="slide-img" src="https://i.ibb.co/MDqTdS55/IMG-20260717-WA0010.jpg" alt="Mahindra XUV" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('xuv',0)" style="display:none">
+                <i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i>
+                <span class="text-xs text-gray-500">Add Photo 1</span>
+              </div>
+            </div>
+            <div class="v-slide go-right" id="vs-xuv-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('xuv',1)">
+                <i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i>
+                <span class="text-xs text-gray-500">Add Photo 2</span>
+              </div>
+            </div>
+            <div class="s-arrow l" onclick="slide('xuv',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('xuv',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('xuv',0)"></div><div class="s-dot" onclick="goSlide('xuv',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Mahindra XUV</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>7 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+        <!-- ERTIGA -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-ertiga">1 / 2</div>
+            <div class="v-slide active" id="vs-ertiga-0">
+              <img class="slide-img" src="https://i.ibb.co/zHV95Fmz/IMG-20260717-WA0032.jpg" alt="Maruti Ertiga" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('ertiga',0)" style="display:none"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-ertiga-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('ertiga',1)"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('ertiga',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('ertiga',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('ertiga',0)"></div><div class="s-dot" onclick="goSlide('ertiga',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Maruti Ertiga</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>7 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+        <!-- HEXA -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-hexa">1 / 2</div>
+            <div class="v-slide active" id="vs-hexa-0">
+              <img class="slide-img" src="https://i.ibb.co/VWJbYYZD/IMG-20260716-WA0016.jpg" alt="Tata Hexa" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('hexa',0)" style="display:none"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-hexa-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('hexa',1)"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('hexa',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('hexa',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('hexa',0)"></div><div class="s-dot" onclick="goSlide('hexa',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Tata Hexa</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>7 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+        <!-- SCALA -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-scala">1 / 2</div>
+            <div class="v-slide active" id="vs-scala-0">
+              <img class="slide-img" src="https://i.ibb.co/TqRCxQqB/IMG-20260716-WA0005.jpg" alt="Skoda Scala" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('scala',0)" style="display:none"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-scala-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('scala',1)"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('scala',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('scala',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('scala',0)"></div><div class="s-dot" onclick="goSlide('scala',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Skoda Scala</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>4 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+        <!-- NISSAN -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-nissan">1 / 2</div>
+            <div class="v-slide active" id="vs-nissan-0">
+              <img class="slide-img" src="https://i.ibb.co/Ps4zhzyN/IMG-20260717-WA0007.jpg" alt="Nissan" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('nissan',0)" style="display:none"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-nissan-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('nissan',1)"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('nissan',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('nissan',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('nissan',0)"></div><div class="s-dot" onclick="goSlide('nissan',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Nissan</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>4 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+        <!-- ACCENT -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-accent">1 / 2</div>
+            <div class="v-slide active" id="vs-accent-0">
+              <img class="slide-img" src="https://i.ibb.co/20pqQH0k/image.jpg" alt="Hyundai Accent" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('accent',0)" style="display:none"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-accent-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('accent',1)"><i class="fas fa-car text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('accent',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('accent',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('accent',0)"></div><div class="s-dot" onclick="goSlide('accent',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Hyundai Accent</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>4 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSES -->
+    <div>
+      <div class="flex items-center gap-4 mb-8">
+        <i class="fas fa-bus text-yellow-400 text-xl"></i>
+        <h3 class="font-playfair text-2xl font-bold text-white">Buses & Travellers</h3>
+        <div class="flex-1 h-px bg-gradient-to-r from-yellow-400 to-transparent opacity-30"></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+        <!-- TRAV 22 -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-t22">1 / 2</div>
+            <div class="v-slide active" id="vs-t22-0">
+              <img class="slide-img" src="https://i.ibb.co/s9sswhWW/IMG-20260717-WA0024.jpg" alt="Force Traveller 22 Seater" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('t22',0)" style="display:none"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-t22-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('t22',1)"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('t22',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('t22',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('t22',0)"></div><div class="s-dot" onclick="goSlide('t22',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Force Traveller</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>22 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+        <!-- TRAV 25 -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-t25">1 / 2</div>
+            <div class="v-slide active" id="vs-t25-0">
+              <img class="slide-img" src="https://i.ibb.co/gLX6qR6c/IMG-20260717-WA0027.jpg" alt="Force Traveller 25 Seater" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('t25',0)" style="display:none"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-t25-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('t25',1)"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('t25',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('t25',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('t25',0)"></div><div class="s-dot" onclick="goSlide('t25',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Force Traveller</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>25 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+        <!-- LUX 45 -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-l45">1 / 2</div>
+            <div class="v-slide active" id="vs-l45-0">
+              <img class="slide-img" src="https://i.ibb.co/pjnKZQYK/IMG-20260717-WA0019.jpg" alt="Luxurious Bus" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('l45',0)" style="display:none"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-l45-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('l45',1)"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('l45',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('l45',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('l45',0)"></div><div class="s-dot" onclick="goSlide('l45',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Luxurious Bus</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>45 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>Luxury AC</span></div>
+          </div>
+        </div>
+        <!-- TATA 50 -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-b50">1 / 2</div>
+            <div class="v-slide active" id="vs-b50-0">
+              <img class="slide-img" src="https://i.ibb.co/jZ5TmM8y/IMG-20260717-WA0022.jpg" alt="Luxurious Bus" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('b50',0)" style="display:none"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-b50-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('b50',1)"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('b50',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('b50',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('b50',0)"></div><div class="s-dot" onclick="goSlide('b50',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1" contenteditable="true" style="border-bottom:1px dashed rgba(255,215,0,0.3);outline:none">Luxurious Bus ✏️</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>50 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+        <!-- TATA 55 -->
+        <div class="v-card reveal-scale">
+          <div class="v-slider">
+            <div class="s-count" id="sc-b55">1 / 2</div>
+            <div class="v-slide active" id="vs-b55-0">
+              <img class="slide-img" src="https://i.ibb.co/N28DSDgq/IMG-20260717-WA0018.jpg" alt="Luxurious Bus" style="display:block"/>
+              <div class="v-placeholder" onclick="addSlideImg('b55',0)" style="display:none"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 1</span></div>
+            </div>
+            <div class="v-slide go-right" id="vs-b55-1">
+              <img class="slide-img" src="" alt=""/>
+              <div class="v-placeholder" onclick="addSlideImg('b55',1)"><i class="fas fa-bus text-yellow-400 text-2xl mb-2 opacity-40"></i><span class="text-xs text-gray-500">Add Photo 2</span></div>
+            </div>
+            <div class="s-arrow l" onclick="slide('b55',-1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="s-arrow r" onclick="slide('b55',1)"><i class="fas fa-chevron-right"></i></div>
+            <div class="s-dots"><div class="s-dot active" onclick="goSlide('b55',0)"></div><div class="s-dot" onclick="goSlide('b55',1)"></div></div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm mb-1">Luxurious Bus</h4>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-users text-yellow-400"></i><span>55 Seater</span></div>
+            <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><i class="fas fa-snowflake text-blue-400"></i><span>AC Available</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12 reveal-up">
+      <p class="text-gray-400 mb-4">Need a vehicle for your group? Get a custom quote!</p>
+      <a href="https://wa.me/918273318888?text=I need a vehicle booking quote" target="_blank"
+         class="btn-gold px-8 py-4 rounded-full inline-flex items-center gap-2 font-bold">
+        <i class="fab fa-whatsapp"></i> Get Vehicle Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MEMORIES ========== -->
+<section id="memories" class="py-24 px-4" style="background:linear-gradient(180deg,#020B18,#071525)">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal-up">
+      <p class="text-yellow-400 text-sm tracking-widest uppercase mb-3 luxury-line">Our Gallery</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">Trip <span class="gold-text">Memories</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Real moments, real smiles — our most cherished journeys</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="memGrid">
+      <div class="img-ph rounded-2xl h-48 md:h-56 reveal-scale" onclick="addMemImg(this)">
+        <div class="absolute inset-0 flex flex-col items-center justify-center ph-label"><i class="fas fa-plus-circle text-yellow-400 text-3xl mb-2 opacity-50"></i><span class="text-xs text-gray-500">Add Trip Photo</span></div>
+        <img src="" alt="" class="photo-img rounded-2xl"/>
+      </div>
+      <div class="img-ph rounded-2xl h-48 md:h-56 reveal-scale lg:col-span-2" onclick="addMemImg(this)">
+        <div class="absolute inset-0 flex flex-col items-center justify-center ph-label"><i class="fas fa-plus-circle text-yellow-400 text-3xl mb-2 opacity-50"></i><span class="text-xs text-gray-500">Add Trip Photo</span></div>
+        <img src="" alt="" class="photo-img rounded-2xl"/>
+      </div>
+      <div class="img-ph rounded-2xl h-48 md:h-56 reveal-scale" onclick="addMemImg(this)">
+        <div class="absolute inset-0 flex flex-col items-center justify-center ph-label"><i class="fas fa-plus-circle text-yellow-400 text-3xl mb-2 opacity-50"></i><span class="text-xs text-gray-500">Add Trip Photo</span></div>
+        <img src="" alt="" class="photo-img rounded-2xl"/>
+      </div>
+      <div class="img-ph rounded-2xl h-48 md:h-56 reveal-scale lg:col-span-2" onclick="addMemImg(this)">
+        <div class="absolute inset-0 flex flex-col items-center justify-center ph-label"><i class="fas fa-plus-circle text-yellow-400 text-3xl mb-2 opacity-50"></i><span class="text-xs text-gray-500">Add Trip Photo</span></div>
+        <img src="" alt="" class="photo-img rounded-2xl"/>
+      </div>
+      <div class="img-ph rounded-2xl h-48 md:h-56 reveal-scale" onclick="addMemImg(this)">
+        <div class="absolute inset-0 flex flex-col items-center justify-center ph-label"><i class="fas fa-plus-circle text-yellow-400 text-3xl mb-2 opacity-50"></i><span class="text-xs text-gray-500">Add Trip Photo</span></div>
+        <img src="" alt="" class="photo-img rounded-2xl"/>
+      </div>
+      <div class="img-ph rounded-2xl h-48 md:h-56 reveal-scale" onclick="addMemImg(this)">
+        <div class="absolute inset-0 flex flex-col items-center justify-center ph-label"><i class="fas fa-plus-circle text-yellow-400 text-3xl mb-2 opacity-50"></i><span class="text-xs text-gray-500">Add Trip Photo</span></div>
+        <img src="" alt="" class="photo-img rounded-2xl"/>
+      </div>
+      <div class="img-ph rounded-2xl h-48 md:h-56 reveal-scale" onclick="addMemImg(this)">
+        <div class="absolute inset-0 flex flex-col items-center justify-center ph-label"><i class="fas fa-plus-circle text-yellow-400 text-3xl mb-2 opacity-50"></i><span class="text-xs text-gray-500">Add Trip Photo</span></div>
+        <img src="" alt="" class="photo-img rounded-2xl"/>
+      </div>
+    </div>
+    <div class="text-center mt-10 reveal-up">
+      <button onclick="addMemSlot()" class="btn-outline px-8 py-3 rounded-full text-sm font-bold">
+        <i class="fas fa-plus mr-2"></i> Add More Photos
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== REVIEWS ========== -->
+<section id="reviews" class="py-24 px-4" style="background:#020B18">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 reveal-up">
+      <p class="text-yellow-400 text-sm tracking-widest uppercase mb-3 luxury-line">Testimonials</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">What Our <span class="gold-text">Travelers Say</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">Real reviews from our 1000+ happy customers</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="review-card p-6 reveal-scale">
+        <div class="flex items-center gap-1 stars mb-4"><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i></div>
+        <p class="text-gray-300 text-sm leading-relaxed mb-5 italic">"Balaji Tours ne humari Ujjain yatra ekdum perfect banaya! Bus AC thi, driver bahut accha tha. Phir se book karunga!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-royal flex items-center justify-center text-yellow-400 font-bold text-sm">RK</div>
+          <div><p class="text-white font-semibold text-sm">Rajesh Kumar</p><p class="text-gray-500 text-xs">Ujjain Tour, 2024</p></div>
+          <div class="ml-auto"><i class="fab fa-google text-blue-400 text-lg"></i></div>
+        </div>
+      </div>
+
+      <div class="review-card p-6 reveal-scale">
+        <div class="flex items-center gap-1 stars mb-4"><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i></div>
+        <p class="text-gray-300 text-sm leading-relaxed mb-5 italic">"15 log gaye Ujjain — sab perfectly arranged. Comfortable bus, amazing price. Highly recommended!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-royal flex items-center justify-center text-yellow-400 font-bold text-sm">PS</div>
+          <div><p class="text-white font-semibold text-sm">Priya Sharma</p><p class="text-gray-500 text-xs">Family Tour, 2024</p></div>
+          <div class="ml-auto"><i class="fab fa-google text-blue-400 text-lg"></i></div>
+        </div>
+      </div>
+
+      <div class="review-card p-6 reveal-scale">
+        <div class="flex items-center gap-1 stars mb-4"><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i></div>
+        <p class="text-gray-300 text-sm leading-relaxed mb-5 italic">"Aligarh se best travel agency! Punctual service, clean vehicle, reasonable price. 5 stars easily!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-royal flex items-center justify-center text-yellow-400 font-bold text-sm">AM</div>
+          <div><p class="text-white font-semibold text-sm">Anil Mishra</p><p class="text-gray-500 text-xs">Private Tour, 2024</p></div>
+          <div class="ml-auto"><i class="fab fa-google text-blue-400 text-lg"></i></div>
+        </div>
+      </div>
+
+      <div class="review-card p-6 reveal-scale">
+        <div class="flex items-center gap-1 stars mb-4"><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star-half-alt text-sm"></i></div>
+        <p class="text-gray-300 text-sm leading-relaxed mb-5 italic">"40 log ek sath gaye — sab kuch perfectly arranged. Very trustworthy agency. Will definitely recommend!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-royal flex items-center justify-center text-yellow-400 font-bold text-sm">SG</div>
+          <div><p class="text-white font-semibold text-sm">Sunita Gupta</p><p class="text-gray-500 text-xs">Group Tour, 2024</p></div>
+          <div class="ml-auto"><i class="fab fa-facebook text-blue-500 text-lg"></i></div>
+        </div>
+      </div>
+
+      <div class="review-card p-6 reveal-scale">
+        <div class="flex items-center gap-1 stars mb-4"><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i></div>
+        <p class="text-gray-300 text-sm leading-relaxed mb-5 italic">"Parents ke liye Ujjain tour book kiya — bahut comfortable. Balaji tours ne poora khayal rakha. 100% satisfied!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-royal flex items-center justify-center text-yellow-400 font-bold text-sm">VT</div>
+          <div><p class="text-white font-semibold text-sm">Vikas Tyagi</p><p class="text-gray-500 text-xs">Ujjain Tour, 2023</p></div>
+          <div class="ml-auto"><i class="fab fa-whatsapp text-green-400 text-lg"></i></div>
+        </div>
+      </div>
+
+      <div class="review-card p-6 reveal-scale">
+        <div class="flex items-center gap-1 stars mb-4"><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i></div>
+        <p class="text-gray-300 text-sm leading-relaxed mb-5 italic">"Best tour operator in Aligarh! Corporate trip handled perfectly — vehicles, timing, coordination. 10/10!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-royal flex items-center justify-center text-yellow-400 font-bold text-sm">NK</div>
+          <div><p class="text-white font-semibold text-sm">Neha Kapoor</p><p class="text-gray-500 text-xs">Corporate Trip, 2024</p></div>
+          <div class="ml-auto"><i class="fab fa-google text-blue-400 text-lg"></i></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-12 reveal-up">
+      <div class="inline-flex items-center gap-6 glass-card px-8 py-5 rounded-2xl flex-wrap justify-center">
+        <div class="text-center"><div class="counter-num text-3xl font-bold">1000+</div><div class="text-xs text-gray-400">Happy Customers</div></div>
+        <div class="w-px h-12 bg-yellow-400 opacity-30 hidden sm:block"></div>
+        <div class="text-center"><div class="counter-num text-3xl font-bold">4.9★</div><div class="text-xs text-gray-400">Average Rating</div></div>
+        <div class="w-px h-12 bg-yellow-400 opacity-30 hidden sm:block"></div>
+        <div class="text-center"><div class="counter-num text-3xl font-bold">100%</div><div class="text-xs text-gray-400">Recommend Us</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact" class="py-24 px-4" style="background:linear-gradient(135deg,#020B18,#071525)">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 reveal-up">
+      <p class="text-yellow-400 text-sm tracking-widest uppercase mb-3 luxury-line">Get In Touch</p>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">Book Your <span class="gold-text">Journey</span></h2>
+      <p class="text-gray-400 max-w-xl mx-auto">Choose your destination and send us your enquiry directly on WhatsApp!</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+      <!-- CONTACT INFO -->
+      <div class="reveal-left space-y-4">
+        <h3 class="font-playfair text-2xl font-bold text-white mb-6">Call / WhatsApp Us</h3>
+
+        <a href="https://wa.me/918855064240" target="_blank" class="contact-card flex items-center gap-4 p-5 group">
+          <div class="w-14 h-14 bg-green-900 bg-opacity-60 rounded-full flex items-center justify-center flex-shrink-0"><i class="fab fa-whatsapp text-green-400 text-2xl"></i></div>
+          <div class="flex-1"><p class="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors">+91 88550 64240</p><p class="text-gray-500 text-sm">Primary — WhatsApp Available</p></div>
+          <span class="badge-live text-dark-bg text-xs font-bold px-3 py-1 rounded-full hidden sm:block">Main</span>
+        </a>
+
+        <a href="tel:+918273318888" class="contact-card flex items-center gap-4 p-5 group">
+          <div class="w-14 h-14 bg-blue-900 bg-opacity-60 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-phone text-blue-400 text-xl"></i></div>
+          <div class="flex-1"><p class="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors">+91 82733 18888</p><p class="text-gray-500 text-sm">Secondary Contact</p></div>
+        </a>
+
+        <a href="tel:+918923307542" class="contact-card flex items-center gap-4 p-5 group">
+          <div class="w-14 h-14 bg-blue-900 bg-opacity-60 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-phone text-blue-400 text-xl"></i></div>
+          <div class="flex-1"><p class="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors">+91 89233 07542</p><p class="text-gray-500 text-sm">Support Line</p></div>
+        </a>
+
+        <a href="tel:+919259136736" class="contact-card flex items-center gap-4 p-5 group">
+          <div class="w-14 h-14 bg-blue-900 bg-opacity-60 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-phone text-blue-400 text-xl"></i></div>
+          <div class="flex-1"><p class="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors">+91 92591 36736</p><p class="text-gray-500 text-sm">Booking Line</p></div>
+        </a>
+
+        <a href="mailto:shreebalajitravelsaligarh@gmail.com" class="contact-card flex items-center gap-4 p-5 group">
+          <div class="w-14 h-14 bg-red-900 bg-opacity-60 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-envelope text-red-400 text-xl"></i></div>
+          <div class="flex-1"><p class="text-white font-bold text-sm group-hover:text-yellow-400 transition-colors break-all">shreebalajitravelsaligarh@gmail.com</p><p class="text-gray-500 text-sm">Email Us Anytime</p></div>
+        </a>
+
+        <div class="contact-card flex items-center gap-4 p-5">
+          <div class="w-14 h-14 bg-yellow-400 bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-map-marker-alt text-yellow-400 text-xl"></i></div>
+          <div><p class="text-white font-bold text-lg">Aligarh, Uttar Pradesh</p><p class="text-gray-500 text-sm">Serving All of India — All India Permit</p></div>
+        </div>
+      </div>
+
+      <!-- ENQUIRY FORM -->
+      <div class="reveal-right">
+        <div class="glass-card rounded-2xl p-8">
+          <h3 class="font-playfair text-2xl font-bold text-white mb-2">Quick Enquiry</h3>
+          <p class="text-gray-500 text-sm mb-6">Select destination &amp; send via WhatsApp instantly!</p>
+
+          <!-- DESTINATION CARDS -->
+          <div class="mb-6">
+            <label class="text-gray-400 text-sm mb-3 block"><i class="fas fa-map-marked-alt text-yellow-400 text-xs mr-1"></i> Choose Your Destination</label>
+            <div class="grid grid-cols-2 gap-3">
+
+              <div class="dest-card p-3 text-center" onclick="pickDest(this,'Ujjain')">
+                <div class="dest-check"><i class="fas fa-check text-dark-bg text-xs"></i></div>
+                <div class="text-2xl mb-1">🕉️</div>
+                <p class="text-white text-sm font-bold">Ujjain</p>
+                <p class="text-green-400 text-xs mt-1">₹3,100 • Ongoing</p>
+              </div>
+
+              <div class="dest-card p-3 text-center" onclick="pickDest(this,'Khatu Shyam & Balaji')">
+                <div class="dest-check"><i class="fas fa-check text-dark-bg text-xs"></i></div>
+                <div class="text-2xl mb-1">🙏</div>
+                <p class="text-white text-sm font-bold">Khatu Shyam</p>
+                <p class="text-yellow-400 text-xs mt-1">₹1,800 • Soon</p>
+              </div>
+
+              <div class="dest-card p-3 text-center" onclick="pickDest(this,'Mathura Vrindavan')">
+                <div class="dest-check"><i class="fas fa-check text-dark-bg text-xs"></i></div>
+                <div class="text-2xl mb-1">🦚</div>
+                <p class="text-white text-sm font-bold">Mathura</p>
+                <p class="text-yellow-400 text-xs mt-1">Coming Soon</p>
+              </div>
+
+              <div class="dest-card p-3 text-center" onclick="pickDest(this,'Haridwar Rishikesh')">
+                <div class="dest-check"><i class="fas fa-check text-dark-bg text-xs"></i></div>
+                <div class="text-2xl mb-1">🌊</div>
+                <p class="text-white text-sm font-bold">Haridwar</p>
+                <p class="text-yellow-400 text-xs mt-1">Coming Soon</p>
+              </div>
+
+              <div class="dest-card p-3 text-center col-span-2" onclick="pickDest(this,'Custom Destination')">
+                <div class="dest-check"><i class="fas fa-check text-dark-bg text-xs"></i></div>
+                <div class="text-2xl mb-1">🗺️</div>
+                <p class="text-white text-sm font-bold">Custom Destination</p>
+                <p class="text-yellow-400 text-xs mt-1">Tell us where you want to go!</p>
+              </div>
+
+            </div>
+            <input type="hidden" id="selDest" value=""/>
+            <p id="destErr" class="text-red-400 text-xs mt-2 hidden">⚠️ Please select a destination</p>
+          </div>
+
+          <div class="space-y-4">
+            <div><label class="text-gray-400 text-sm mb-2 block">Your Name</label><input type="text" id="eName" placeholder="Enter your full name" class="f-input"/></div>
+            <div><label class="text-gray-400 text-sm mb-2 block">WhatsApp Number</label><input type="tel" id="ePhone" placeholder="Your WhatsApp number" class="f-input"/></div>
+            <div><label class="text-gray-400 text-sm mb-2 block">Number of Travelers</label><input type="number" id="ePeople" placeholder="How many people?" min="1" class="f-input"/></div>
+            <div><label class="text-gray-400 text-sm mb-2 block">Message (Optional)</label><textarea id="eMsg" rows="3" placeholder="Any special requirements..." class="f-input resize-none"></textarea></div>
+            <button onclick="sendEnquiry()" class="btn-gold w-full py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2">
+              <i class="fab fa-whatsapp text-lg"></i> Send Enquiry on WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer style="background:linear-gradient(180deg,#071525,#020B18)" class="pt-16 pb-8 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+      <div>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center"><i class="fas fa-om text-dark-bg text-xl"></i></div>
+          <div><div class="font-playfair text-xl font-bold gold-text">Balaji Tours</div><div class="text-xs text-gray-500">&amp; Travels, Aligarh</div></div>
+        </div>
+        <div class="inline-flex items-center gap-2 permit-badge rounded-lg px-3 py-2 mb-4">
+          <i class="fas fa-certificate text-yellow-400 text-xs"></i>
+          <span class="text-yellow-400 text-xs font-bold">ALL INDIA PERMIT</span>
+          <i class="fas fa-check-circle text-green-400 text-xs"></i>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed mb-5">Where Every Journey Becomes a Divine Memory. 1000+ happy travelers trust us.</p>
+        <div class="flex gap-3">
+          <a href="https://www.facebook.com/share/1JguC3i11D/" target="_blank" class="w-10 h-10 bg-blue-800 bg-opacity-50 rounded-full flex items-center justify-center text-blue-400 hover:bg-blue-700 hover:text-white transition-all"><i class="fab fa-facebook-f text-sm"></i></a>
+          <a href="https://www.instagram.com/balaji_tours_aligarh?igsh=MXd5ZWpnOG56MTNn" target="_blank" class="w-10 h-10 bg-pink-900 bg-opacity-50 rounded-full flex items-center justify-center text-pink-400 hover:bg-pink-800 hover:text-white transition-all"><i class="fab fa-instagram text-sm"></i></a>
+          <a href="https://wa.me/918273318888" target="_blank" class="w-10 h-10 bg-green-900 bg-opacity-50 rounded-full flex items-center justify-center text-green-400 hover:bg-green-800 hover:text-white transition-all"><i class="fab fa-whatsapp text-sm"></i></a>
+          <a href="mailto:shreebalajitravelsaligarh@gmail.com" class="w-10 h-10 bg-red-900 bg-opacity-50 rounded-full flex items-center justify-center text-red-400 hover:bg-red-800 hover:text-white transition-all"><i class="fas fa-envelope text-sm"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-playfair text-lg font-bold text-white mb-5 gba pb-2">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="#home"     class="text-gray-500 text-sm hover:text-yellow-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-yellow-400 text-xs"></i>Home</a></li>
+          <li><a href="#packages" class="text-gray-500 text-sm hover:text-yellow-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-yellow-400 text-xs"></i>Tour Packages</a></li>
+          <li><a href="#fleet"    class="text-gray-500 text-sm hover:text-yellow-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-yellow-400 text-xs"></i>Our Fleet</a></li>
+          <li><a href="#memories" class="text-gray-500 text-sm hover:text-yellow-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-yellow-400 text-xs"></i>Memories</a></li>
+          <li><a href="#reviews"  class="text-gray-500 text-sm hover:text-yellow-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-yellow-400 text-xs"></i>Reviews</a></li>
+          <li><a href="#contact"  class="text-gray-500 text-sm hover:text-yellow-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-yellow-400 text-xs"></i>Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-playfair text-lg font-bold text-white mb-5 gba pb-2">Popular Tours</h4>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-2 text-sm"><i class="fas fa-om text-yellow-400 text-xs"></i><span class="text-gray-500">Ujjain — <span class="text-green-400">Ongoing ✓</span></span></li>
+          <li class="flex items-center gap-2 text-sm"><i class="fas fa-om text-yellow-400 text-xs"></i><span class="text-gray-500">Khatu Shyam &amp; Balaji — <span class="text-yellow-500">Soon</span></span></li>
+          <li class="flex items-center gap-2 text-sm"><i class="fas fa-om text-yellow-400 text-xs"></i><span class="text-gray-500">Mathura Vrindavan — <span class="text-yellow-500">Soon</span></span></li>
+          <li class="flex items-center gap-2 text-sm"><i class="fas fa-om text-yellow-400 text-xs"></i><span class="text-gray-500">Haridwar Rishikesh — <span class="text-yellow-500">Soon</span></span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-playfair text-lg font-bold text-white mb-5 gba pb-2">Contact Us</h4>
+        <div class="space-y-3">
+          <a href="tel:+918273318888" class="flex items-center gap-3 text-gray-500 text-sm hover:text-yellow-400 transition-colors"><i class="fas fa-phone text-yellow-400 text-xs w-4"></i>+91 82733 18888</a>
+          <a href="tel:+918855064240" class="flex items-center gap-3 text-gray-500 text-sm hover:text-yellow-400 transition-colors"><i class="fas fa-phone text-yellow-400 text-xs w-4"></i>+91 88550 64240</a>
+          <a href="tel:+918923307542" class="flex items-center gap-3 text-gray-500 text-sm hover:text-yellow-400 transition-colors"><i class="fas fa-phone text-yellow-400 text-xs w-4"></i>+91 89233 07542</a>
+          <a href="tel:+919259136736" class="flex items-center gap-3 text-gray-500 text-sm hover:text-yellow-400 transition-colors"><i class="fas fa-phone text-yellow-400 text-xs w-4"></i>+91 92591 36736</a>
+          <a href="mailto:shreebalajitravelsaligarh@gmail.com" class="flex items-center gap-3 text-gray-500 text-sm hover:text-yellow-400 transition-colors"><i class="fas fa-envelope text-yellow-400 text-xs w-4"></i>Gmail</a>
+          <div class="flex items-start gap-3 text-gray-500 text-sm"><i class="fas fa-map-marker-alt text-yellow-400 text-xs w-4 mt-1"></i><span>Aligarh, Uttar Pradesh, India</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="gold-divider mb-6"></div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-gray-600 text-xs">© 2024 Balaji Tours &amp; Travels, Aligarh. All Rights Reserved.</p>
+      <p class="text-gray-700 text-xs flex items-center gap-1">Made with <i class="fas fa-heart text-red-500 text-xs mx-1"></i> for every pilgrim</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<div class="wa-float">
+  <a href="https://wa.me/918273318888?text=Hello! I want to book a tour with Balaji Tours & Travels" target="_blank"
+     class="w-16 h-16 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center transition-all"
+     style="box-shadow:0 0 30px rgba(34,197,94,0.5)">
+    <i class="fab fa-whatsapp text-white text-3xl"></i>
+  </a>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="fixed top-24 right-4 z-50 transform translate-x-full transition-transform duration-500">
+  <div class="glass-card rounded-xl p-4 flex items-center gap-3" style="min-width:220px">
+    <i class="fas fa-check-circle text-green-400 text-xl"></i>
+    <p id="toastTxt" class="text-white text-sm"></p>
+  </div>
+</div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ===== SCROLL PROGRESS =====
+window.addEventListener('scroll',()=>{
+  const t=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('scrollBar').style.width=(window.scrollY/t*100)+'%';
+});
+
+// ===== NAV =====
+window.addEventListener('scroll',()=>{
+  const n=document.getElementById('mainNav');
+  if(window.scrollY>80){
+    n.style.background='rgba(2,11,24,0.97)';
+    n.style.backdropFilter='blur(20px)';
+    n.style.borderBottom='1px solid rgba(255,215,0,0.1)';
+  }else{
+    n.style.background='transparent';
+    n.style.backdropFilter='none';
+    n.style.borderBottom='none';
+  }
+});
+
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  const i=document.getElementById('menuIcon');
+  m.classList.toggle('open');
+  i.className=m.classList.contains('open')?'fas fa-times':'fas fa-bars';
+}
+
+// ===== SNOWFLAKES =====
+(function(){
+  const box=document.getElementById('snowBox');
+  const types=[
+    {c:'❄',sz:[14,22],op:[0.6,0.9]},
+    {c:'❅',sz:[10,18],op:[0.5,0.8]},
+    {c:'❆',sz:[8,14], op:[0.4,0.7]},
+    {c:'·', sz:[4,8],  op:[0.3,0.6]},
+    {c:'•', sz:[3,6],  op:[0.2,0.5]},
+  ];
+  for(let i=0;i<55;i++){
+    const t=types[Math.floor(Math.random()*types.length)];
+    const s=document.createElement('div');
+    s.className='snowflake';
+    s.innerHTML=t.c;
+    s.style.left=(Math.random()*105-2)+'%';
+    s.style.top='-20px';
+    s.style.fontSize=(Math.random()*(t.sz[1]-t.sz[0])+t.sz[0])+'px';
+    s.style.opacity=Math.random()*(t.op[1]-t.op[0])+t.op[0];
+    s.style.animationDuration=(Math.random()*10+6)+'s';
+    s.style.animationDelay=(Math.random()*12)+'s';
+    s.style.color=`rgba(${200+Math.random()*55|0},${220+Math.random()*35|0},255,0.9)`;
+    box.appendChild(s);
+  }
+})();
+
+// ===== STAR CANVAS =====
+const cv=document.getElementById('heroCanvas');
+const cx=cv.getContext('2d');
+let stars=[];
+function resizeCv(){cv.width=window.innerWidth;cv.height=cv.parentElement.offsetHeight||window.innerHeight;}
+resizeCv();
+window.addEventListener('resize',()=>{resizeCv();mkStars();});
+function mkStars(){
+  stars=[];
+  for(let i=0;i<220;i++)stars.push({
+    x:Math.random()*cv.width,y:Math.random()*cv.height*0.65,
+    r:Math.random()*1.8+0.2,ph:Math.random()*Math.PI*2,
+    sp:Math.random()*0.006+0.002,col:Math.random()>0.8?[200,230,255]:[255,255,255]
+  });
+}
+mkStars();
+function drawStars(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  stars.forEach(s=>{
+    s.ph+=s.sp;
+    const a=(Math.sin(s.ph)+1)/2*0.85+0.1;
+    cx.beginPath();cx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    cx.fillStyle=`rgba(${s.col[0]},${s.col[1]},${s.col[2]},${a})`;cx.fill();
+    if(s.r>1.2){cx.beginPath();cx.arc(s.x,s.y,s.r*2.5,0,Math.PI*2);cx.fillStyle=`rgba(${s.col[0]},${s.col[1]},${s.col[2]},${a*0.15})`;cx.fill();}
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ===== HERO GSAP =====
+gsap.timeline({delay:0.2})
+  .from('#heroBadge',  {y:-50,opacity:0,duration:0.8,ease:'power3.out'})
+  .from('#heroTitle',  {y:90, opacity:0,duration:1.1,ease:'power3.out'},'-=0.4')
+  .from('#heroTag',    {y:40, opacity:0,duration:0.8,ease:'power3.out'},'-=0.6')
+  .from('#heroSub',    {y:30, opacity:0,duration:0.7,ease:'power3.out'},'-=0.5')
+  .from('#permitBadge',{scale:0.7,opacity:0,duration:0.7,ease:'back.out(1.7)'},'-=0.4')
+  .from('#heroBtns',   {y:30, opacity:0,duration:0.7,ease:'power3.out'},'-=0.4');
+
+gsap.to('.mountain-wrap',{y:80,scrollTrigger:{trigger:'#home',start:'top top',end:'bottom top',scrub:2}});
+
+// ===== COUNTERS =====
+function runCounter(el,target,suffix){
+  let cur=0;const step=target/70;
+  const t=setInterval(()=>{
+    cur+=step;
+    if(cur>=target){cur=target;clearInterval(t);}
+    el.textContent=Math.floor(cur)+suffix;
+  },22);
+}
+ScrollTrigger.create({
+  trigger:'.counter-num[data-target]',start:'top 88%',once:true,
+  onEnter:()=>{
+    document.querySelectorAll('.counter-num[data-target]').forEach(el=>{
+      runCounter(el,parseInt(el.dataset.target),el.dataset.suffix||'+');
+    });
+  }
+});
+
+// ===== SCROLL REVEALS =====
+gsap.utils.toArray('.reveal-up').forEach(el=>{
+  gsap.to(el,{y:0,opacity:1,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 89%',once:true}});
+});
+gsap.utils.toArray('.reveal-scale').forEach((el,i)=>{
+  gsap.to(el,{scale:1,opacity:1,duration:0.7,ease:'back.out(1.4)',delay:(i%5)*0.08,scrollTrigger:{trigger:el,start:'top 89%',once:true}});
+});
+gsap.utils.toArray('.reveal-left').forEach(el=>{
+  gsap.to(el,{x:0,opacity:1,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%',once:true}});
+});
+gsap.utils.toArray('.reveal-right').forEach(el=>{
+  gsap.to(el,{x:0,opacity:1,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%',once:true}});
+});
+
+// ===== VEHICLE SLIDER =====
+const sState={};
+['xuv','ertiga','hexa','scala','nissan','accent','t22','t25','l45','b50','b55'].forEach(id=>sState[id]=0);
+
+function slide(id,dir){
+  const cur=sState[id];
+  const nxt=(cur+dir+2)%2;
+  goSlide(id,nxt);
+}
+
+function goSlide(id,nxt){
+  const cur=sState[id];
+  if(cur===nxt)return;
+  const curEl=document.getElementById(`vs-${id}-${cur}`);
+  const nxtEl=document.getElementById(`vs-${id}-${nxt}`);
+  const sc=document.getElementById(`sc-${id}`);
+  const dots=document.querySelectorAll(`#vs-${id}-0`).length>0?
+    document.querySelectorAll(`[id^="vs-${id}-"]`):[];
+
+  const goRight=nxt>cur||(cur===1&&nxt===0&&dir===-1);
+
+  // reset next position
+  gsap.set(nxtEl,{x:goRight?'100%':'-100%',opacity:0});
+  nxtEl.classList.remove('go-left','go-right','active');
+
+  gsap.to(curEl,{x:goRight?'-100%':'100%',opacity:0,duration:0.45,ease:'power2.inOut',
+    onComplete:()=>{curEl.classList.remove('active');curEl.classList.add(goRight?'go-left':'go-right');}
+  });
+  gsap.to(nxtEl,{x:'0%',opacity:1,duration:0.45,ease:'power2.inOut',
+    onStart:()=>nxtEl.classList.add('active')
+  });
+
+  sState[id]=nxt;
+  if(sc)sc.textContent=`${nxt+1} / 2`;
+
+  // update dots
+  const allDots=document.querySelectorAll(`#vs-${id}-0`)?.length>0 ? [] : [];
+  // find parent slider and update dots
+  const parentSlider=document.getElementById(`vs-${id}-0`)?.closest('.v-slider');
+  if(parentSlider){
+    parentSlider.querySelectorAll('.s-dot').forEach((d,i)=>d.classList.toggle('active',i===nxt));
+  }
+}
+
+// override slide to pass direction
+const _origSlide=slide;
+window.slide=function(id,dir){
+  const cur=sState[id];
+  const nxt=(cur+dir+2)%2;
+  const goRight=dir>0;
+
+  const curEl=document.getElementById(`vs-${id}-${cur}`);
+  const nxtEl=document.getElementById(`vs-${id}-${nxt}`);
+  const sc=document.getElementById(`sc-${id}`);
+
+  gsap.set(nxtEl,{x:goRight?'100%':'-100%',opacity:0});
+  nxtEl.classList.remove('go-left','go-right','active');
+
+  gsap.to(curEl,{x:goRight?'-100%':'100%',opacity:0,duration:0.45,ease:'power2.inOut',
+    onComplete:()=>{curEl.classList.remove('active');curEl.classList.add(goRight?'go-left':'go-right');}
+  });
+  gsap.to(nxtEl,{x:'0%',opacity:1,duration:0.45,ease:'power2.inOut',
+    onStart:()=>nxtEl.classList.add('active')
+  });
+
+  sState[id]=nxt;
+  if(sc)sc.textContent=`${nxt+1} / 2`;
+
+  const parentSlider=document.getElementById(`vs-${id}-0`)?.closest('.v-slider');
+  if(parentSlider){
+    parentSlider.querySelectorAll('.s-dot').forEach((d,i)=>d.classList.toggle('active',i===nxt));
+  }
+};
+
+window.goSlide=function(id,nxt){
+  const cur=sState[id];
+  if(cur===nxt)return;
+  window.slide(id,nxt>cur?1:-1);
+};
+
+// ===== ADD SLIDE IMAGE =====
+function addSlideImg(vid,idx){
+  const inp=document.createElement('input');
+  inp.type='file';inp.accept='image/*';
+  inp.onchange=function(){
+    const f=this.files[0];if(!f)return;
+    const r=new FileReader();
+    r.onload=e=>{
+      const slide=document.getElementById(`vs-${vid}-${idx}`);
+      const img=slide.querySelector('.slide-img');
+      const ph=slide.querySelector('.v-placeholder');
+      img.src=e.target.result;img.style.display='block';
+      if(ph)ph.style.display='none';
+      gsap.from(img,{opacity:0,scale:1.08,duration:0.5,ease:'power2.out'});
+      toast(`Photo ${idx+1} added ✅`);
+    };
+    r.readAsDataURL(f);
+  };
+  inp.click();
+}
+
+// ===== PACKAGE IMAGE =====
+function addPackageImg(container){
+  const inp=document.createElement('input');
+  inp.type='file';inp.accept='image/*';
+  inp.onchange=function(){
+    const f=this.files[0];if(!f)return;
+    const r=new FileReader();
+    r.onload=e=>{
+      const img=container.querySelector('.photo-img');
+      const ph=container.querySelector('.ph-label');
+      img.src=e.target.result;img.style.display='block';
+      if(ph)ph.style.display='none';
+      gsap.from(img,{opacity:0,scale:1.1,duration:0.5});
+    };
+    r.readAsDataURL(f);
+  };
+  inp.click();
+}
+
+// ===== MEMORY IMAGES =====
+function addMemImg(slot){
+  const inp=document.createElement('input');
+  inp.type='file';inp.accept='image/*';
+  inp.onchange=function(){
+    const f=this.files[0];if(!f)return;
+    const r=new FileReader();
+    r.onload=e=>{
+      const img=slot.querySelector('.photo-img');
+      const ph=slot.querySelector('.ph-label');
+      img.src=e.target.result;img.style.display='block';
+      if(ph)ph.style.display='none';
+      gsap.from(img,{opacity:0,scale:1.1,duration:0.6,ease:'power2.out'});
+    };
+    r.readAsDataURL(f);
+  };
+  inp.click();
+}
+
+function addMemSlot(){
+  const g=document.getElementById('memGrid');
+  const s=document.createElement('div');
+  s.className='img-ph rounded-2xl h-48 md:h-56';
+  s.style.position='relative';
+  s.onclick=function(){addMemImg(this);};
+  s.innerHTML=`
+    <div class="absolute inset-0 flex flex-col items-center justify-center ph-label">
+      <i class="fas fa-plus-circle text-yellow-400 text-3xl mb-2 opacity-50"></i>
+      <span class="text-xs text-gray-500">Add Trip Photo</span>
+    </div>
+    <img src="" alt="" class="photo-img rounded-2xl" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0"/>
+  `;
+  g.appendChild(s);
+  gsap.from(s,{opacity:0,scale:0.8,duration:0.5,ease:'back.out(1.5)'});
+  toast('New photo slot added! ✨');
+}
+
+// ===== DEST PICKER =====
+function pickDest(card,name){
+  document.querySelectorAll('.dest-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  document.getElementById('selDest').value=name;
+  document.getElementById('destErr').classList.add('hidden');
+  gsap.from(card,{scale:0.95,duration:0.3,ease:'back.out(1.5)'});
+  toast(`✅ ${name} selected!`);
+}
+
+// ===== ENQUIRY =====
+function sendEnquiry(){
+  const dest=document.getElementById('selDest').value;
+  const name=document.getElementById('eName').value.trim();
+  const phone=document.getElementById('ePhone').value.trim();
+  const people=document.getElementById('ePeople').value.trim();
+  const msg=document.getElementById('eMsg').value.trim();
+  if(!dest){document.getElementById('destErr').classList.remove('hidden');return;}
+  if(!name){toast('⚠️ Please enter your name!');return;}
+  if(!phone){toast('⚠️ Please enter your phone!');return;}
+  const txt=`🙏 *New Tour Enquiry — Balaji Tours & Travels*\n\n🗺️ Destination: ${dest}\n👤 Name: ${name}\n📞 Phone: ${phone}\n👥 Travelers: ${people||'Not specified'}\n💬 Message: ${msg||'None'}\n\n_Sent from Balaji Tours Website_`;
+  window.open(`https://wa.me/918273318888?text=${encodeURIComponent(txt)}`,'_blank');
+  toast('🚀 Opening WhatsApp...');
+}
+
+function notifyMe(tour){
+  window.open(`https://wa.me/918273318888?text=${encodeURIComponent(`🙏 Hi! Please notify me when ${tour} tour is available. Thank you!`)}`,'_blank');
+  toast(`🔔 We'll notify you about ${tour}!`);
+}
+
+// ===== TOAST =====
+function toast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastTxt').textContent=msg;
+  t.style.transform='translateX(0)';
+  setTimeout(()=>t.style.transform='translateX(200%)',3500);
+}
+</script>
+</body>
+</html>
